@@ -1,17 +1,46 @@
 import React, { useState } from "react";
 
 const SignUp = () => {
-  const [email, setEmail] = useState("");
-  const updateEmailField = (e) => {
-    setEmail(e.target.value);
+  const [userInfo, setUserInfo] = useState({
+    email: "",
+    password: "",
+    passwordconf: "",
+    firstname: "",
+    lastname: "",
+  });
+  const handleSignUpChange = (e) => {
+    const { name, value } = e.target;
+    setUserInfo((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+  const handleSubmit = () => {
+    console.log(userInfo);
   };
   return (
     <div className="SignUp">
-      <h1>{email}</h1>
-      <input
-        type="email"
-        name="email"
-        onChange={(e) => updateEmailField(e)}></input>
+      <h1>{JSON.stringify(userInfo)}</h1>
+      <form>
+        <input type="email" name="email" onChange={handleSignUpChange}></input>
+        <input
+          type="password"
+          name="password"
+          onChange={handleSignUpChange}></input>
+        <input
+          type="password"
+          name="passwordconf"
+          onChange={handleSignUpChange}></input>
+        <input
+          type="text"
+          name="firstname"
+          onChange={handleSignUpChange}></input>
+        <input
+          type="text"
+          name="lastname"
+          onChange={handleSignUpChange}></input>
+        <button onClick={handleSubmit}>Submit</button>
+      </form>
     </div>
   );
 };
